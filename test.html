@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心理年龄测试 - 问题</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-3xl font-bold text-gray-900 text-center">心理年龄测试</h1>
+        </div>
+    </header>
+    
+    <main class="container mx-auto px-4 py-8">
+        <section class="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8 mb-8">
+            <div class="flex items-center justify-between mb-8">
+                <a href="index.html" class="flex items-center text-gray-500 hover:text-gray-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    返回首页
+                </a>
+                <div class="flex items-center">
+                    <span id="currentQuestionNum" class="text-lg font-medium text-blue-600">1</span>
+                    <span class="text-gray-400 mx-1">/</span>
+                    <span id="totalQuestions" class="text-gray-500">24</span>
+                </div>
+            </div>
+            
+            <div id="progressBar" class="w-full bg-gray-200 rounded-full h-2.5 mb-6 overflow-hidden">
+                <div id="progressBarFill" class="bg-blue-600 h-2.5 rounded-full" style="width: 4%"></div>
+            </div>
+            
+            <div id="dimensionLabel" class="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full mb-4">
+                情绪调节能力
+            </div>
+            
+            <div id="questionContainer" class="mb-8">
+                <h2 id="questionText" class="text-xl font-medium text-gray-800 mb-6">当您感到沮丧或失落时，通常会怎么做？</h2>
+                
+                <div id="optionsContainer" class="space-y-4">
+                    <label class="block">
+                        <div class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 group transition-colors">
+                            <input type="radio" name="answer" value="A" class="mt-1 mr-4 h-4 w-4 text-blue-600">
+                            <div>
+                                <span class="font-medium text-gray-800 group-hover:text-gray-900 block mb-1">A.</span>
+                                <span class="text-gray-600 group-hover:text-gray-700">情绪低落很久，很难恢复</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <label class="block">
+                        <div class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 group transition-colors">
+                            <input type="radio" name="answer" value="B" class="mt-1 mr-4 h-4 w-4 text-blue-600">
+                            <div>
+                                <span class="font-medium text-gray-800 group-hover:text-gray-900 block mb-1">B.</span>
+                                <span class="text-gray-600 group-hover:text-gray-700">找些事情分散注意力，但情绪仍在</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <label class="block">
+                        <div class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 group transition-colors">
+                            <input type="radio" name="answer" value="C" class="mt-1 mr-4 h-4 w-4 text-blue-600">
+                            <div>
+                                <span class="font-medium text-gray-800 group-hover:text-gray-900 block mb-1">C.</span>
+                                <span class="text-gray-600 group-hover:text-gray-700">和亲近的人倾诉，寻求安慰</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <label class="block">
+                        <div class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 group transition-colors">
+                            <input type="radio" name="answer" value="D" class="mt-1 mr-4 h-4 w-4 text-blue-600">
+                            <div>
+                                <span class="font-medium text-gray-800 group-hover:text-gray-900 block mb-1">D.</span>
+                                <span class="text-gray-600 group-hover:text-gray-700">尝试分析情绪来源，并寻找积极应对方式</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <label class="block">
+                        <div class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 group transition-colors">
+                            <input type="radio" name="answer" value="E" class="mt-1 mr-4 h-4 w-4 text-blue-600">
+                            <div>
+                                <span class="font-medium text-gray-800 group-hover:text-gray-900 block mb-1">E.</span>
+                                <span class="text-gray-600 group-hover:text-gray-700">能够接受并处理情绪，必要时会寻求专业支持</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center">
+                <button id="prevButton" class="px-4 py-2 text-gray-600 font-medium rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300">
+                    上一题
+                </button>
+                <button id="nextButton" class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300">
+                    下一题
+                </button>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-100 border-t border-gray-200 mt-12">
+        <div class="container mx-auto px-4 py-6">
+            <p class="text-center text-gray-500 text-sm">© 2023 心理年龄测试. 本测试仅供参考，不构成专业心理诊断</p>
+        </div>
+    </footer>
+    
+    <script src="testLogic.js"></script>
+</body>
+</html>
+

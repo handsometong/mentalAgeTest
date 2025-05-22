@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心理年龄测试 - 测试结果</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-3xl font-bold text-gray-900 text-center">心理年龄测试结果</h1>
+        </div>
+    </header>
+    
+    <main class="container mx-auto px-4 py-8">
+        <section class="max-w-4xl mx-auto mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <a href="index.html" class="flex items-center text-gray-500 hover:text-gray-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    返回首页
+                </a>
+                <button id="shareButton" class="flex items-center px-4 py-2 text-blue-600 font-medium rounded-lg hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                    </svg>
+                    分享结果
+                </button>
+            </div>
+        </section>
+        
+        <section class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8 mb-8">
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-900">您的心理年龄: <span id="mentalAge" class="text-blue-600">28</span> 岁</h2>
+                <p class="text-gray-500 mt-2">测试完成时间: <span id="testDate">2023年11月15日</span></p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-6 mb-8">
+                <div class="w-full md:w-1/2">
+                    <canvas id="dimensionsChart" width="400" height="400"></canvas>
+                </div>
+                <div class="w-full md:w-1/2 flex flex-col justify-center">
+                    <div id="overallAnalysis" class="p-6 bg-blue-50 rounded-lg mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">综合分析</h3>
+                        <p class="text-gray-700">
+                            您的心理年龄测试结果显示，您的心理成熟度整体处于良好水平。您在情绪调节和自我意识方面表现突出，这使您能够有效地处理生活中的挑战。同时，您在认知灵活性上有进一步发展的空间。
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <div class="font-bold text-3xl text-blue-600 mb-1">32</div>
+                            <div class="text-sm text-gray-500">实际年龄</div>
+                        </div>
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <div class="font-bold text-3xl text-blue-600 mb-1">76%</div>
+                            <div class="text-sm text-gray-500">成熟度百分比</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 pb-2 border-b">各维度详细分析</h3>
+                
+                <div id="dimensionResults" class="space-y-6">
+                    <!-- 情绪调节能力 -->
+                    <div class="p-5 border rounded-lg hover:shadow-sm transition-shadow">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-lg font-medium text-gray-800">情绪调节能力</h4>
+                            <div class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                                得分: <span>42/60</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 70%"></div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">
+                            您在情绪调节方面表现良好，能够识别和处理大多数情绪状况。您善于在适当的时候寻求社交支持，
+                            并能够从积极的角度看待挑战。继续发展您在高压情境下保持冷静的能力，将使您受益更多。
+                        </p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700">情绪觉察</span>
+                            <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700">压力管理</span>
+                            <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700">沟通表达</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 认知灵活性 -->
+                    <div class="p-5 border rounded-lg hover:shadow-sm transition-shadow">
+                        <div class="flex justify-between items-start mb-3">
+                            <h4 class="text-lg font-medium text-gray-800">认知灵活性与开放性</h4>
+                            <div class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                                得分: <span>38/60</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 63%"></div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">
+                            在认知灵活性方面，您展现出对新思想和经验的中等水平开放性。您能够考虑不同的观点，但有时可能偏好已有的思维模式。
+                            您可以通过主动寻求不同的观点和体验，进一步培养认知灵活性，这将帮助您更好地适应变化和解决复杂问题。
+                        </p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700">思维开放</span>
+                            <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700">创新思考</span>
+                            <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700">应变能力</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">成长建议</h3>
+                <ul class="space-y-3" id="growthSuggestions">
+                    <li class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="text-gray-700">尝试正念冥想练习，帮助增强情绪觉察和调节能力</span>
+                    </li>
+                    <li class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="text-gray-700">主动接触不同领域的知识和观点，培养认知灵活性</span>
+                    </li>
+                    <li class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="text-gray-700">练习在日常生活中应用解决问题的多种方法，增强面对挑战时的灵活性</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="flex justify-center">
+                <a href="test.html" class="px-6 py-2 mr-4 text-gray-700 font-medium border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50 transition-colors duration-300">
+                    重新测试
+                </a>
+                <button id="downloadReport" class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-300">
+                    下载完整报告
+                </button>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-100 border-t border-gray-200 mt-12">
+        <div class="container mx-auto px-4 py-6">
+            <p class="text-center text-gray-500 text-sm">© 2023 心理年龄测试. 本测试仅供参考，不构成专业心理诊断</p>
+        </div>
+    </footer>
+    
+    <script src="resultLogic.js"></script>
+</body>
+</html>
+
